@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AK KHAN E-BOOKS</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Noto+Nastaliq+Urdu&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#101010;color:#f5ebdd;font-family:Arial,sans-serif}
+header{padding:22px 7%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #8e702d}
+.logo{color:#d4af37;font-family:'Playfair Display',serif;font-size:25px;font-weight:bold}
+nav a{color:#f5ebdd;text-decoration:none;margin:0 9px;font-size:14px}
+.hero{text-align:center;padding:85px 20px;background:linear-gradient(#000b,#000d),radial-gradient(#55451c,#101010)}
+.hero h1{font-family:'Playfair Display',serif;color:#d4af37;font-size:43px}
+.hero h2{font-family:'Noto Nastaliq Urdu',serif;font-size:25px;margin:25px 0}
+.hero p{color:#d0c5b2;line-height:2}
+.gold{color:#d4af37}
+.btn{display:inline-block;background:#d4af37;color:#111;padding:12px 25px;border:0;border-radius:5px;text-decoration:none;font-weight:bold;cursor:pointer;margin-top:22px}
+section{padding:55px 7%;text-align:center}
+section h2{color:#d4af37;font-size:29px;margin-bottom:25px}
+.urdu{font-family:'Noto Nastaliq Urdu',serif}
+.search{width:min(500px,100%);padding:13px;border:1px solid #d4af37;border-radius:5px;background:#1c1c1c;color:white;margin:10px auto 25px}
+.categories{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-bottom:30px}
+.category{padding:9px 18px;background:#202020;border:1px solid #806a32;color:#f5ebdd;border-radius:20px;cursor:pointer}
+.category.active,.category:hover{background:#d4af37;color:#111}
+.books{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:22px}
+.book{background:#1b1b1b;border:1px solid #5e4d25;border-radius:10px;padding:25px 15px;transition:.3s}
+.book:hover{transform:translateY(-5px);border-color:#d4af37}
+.cover{height:175px;background:linear-gradient(145deg,#30250d,#080808);border:1px solid #d4af37;display:flex;align-items:center;justify-content:center;flex-direction:column;margin-bottom:17px;color:#d4af37;padding:10px}
+.cover strong{font-family:'Playfair Display',serif;font-size:22px}
+.book h3{color:#d4af37;margin-bottom:12px}
+.book p{color:#c7bda9;line-height:1.8;font-size:14px}
+.read{background:#d4af37;color:#111;border:0;padding:10px 18px;border-radius:4px;margin-top:15px;cursor:pointer}
+.about p{max-width:700px;margin:auto;line-height:2;color:#d1c6b5}
+footer{text-align:center;padding:28px;background:#080808;border-top:1px solid #806a32;color:#aaa;line-height:2}
+.modal{display:none;position:fixed;inset:0;background:#000d;align-items:center;justify-content:center;padding:20px;z-index:5}
+.modal-box{background:#1c1c1c;border:1px solid #d4af37;padding:28px;border-radius:10px;max-width:450px;width:100%;text-align:center}
+.modal-box p{line-height:2;margin-top:15px}
+.close{float:right;background:none;color:#d4af37;border:0;font-size:23px;cursor:pointer}
+@media(max-width:600px){header{flex-direction:column;gap:15px}nav a{margin:0 5px;font-size:12px}.hero h1{font-size:32px}.hero{padding:65px 15px}}
+</style>
+</head>
+<body>
+
+<header>
+<div class="logo">AK KHAN E-BOOKS</div>
+<nav>
+<a href="#home">Home</a>
+<a href="#books">Books</a>
+<a href="#about">About</a>
+<a href="#contact">Contact</a>
+</nav>
+</header>
+
+<div class="hero" id="home">
+<h1>Welcome to <span class="gold">AK KHAN</span></h1>
+<h2 class="urdu">احساسات کے الفاظ</h2>
+<p>Discover beautiful Urdu poetry, meaningful thoughts and heart-touching literature.</p>
+<a href="#books" class="btn">Explore Books</a>
+</div>
+
+<section id="books">
+<h2>Our Book Collection</h2>
+<input class="search" id="search" placeholder="Search your favourite book..." oninput="filterBooks()">
+<div class="categories">
+<button class="category active" onclick="setCategory('all',this)">All Books</button>
+<button class="category" onclick="setCategory('sad',this)">Sad Poetry</button>
+<button class="category" onclick="setCategory('love',this)">Love & Sincerity</button>
+<button class="category" onclick="setCategory('islamic',this)">Islamic Thoughts</button>
+<button class="category" onclick="setCategory('quotes',this)">Life Quotes</button>
+</div>
+
+<div class="books" id="bookList">
+
+<div class="book" data-category="sad">
+<div class="cover"><strong>AK KHAN</strong><span class="urdu">احساسات کے الفاظ</span></div>
+<h3 class="urdu">احساسات کے الفاظ</h3>
+<p>A collection of heartfelt Urdu poetry and deep emotions.</p>
+<button class="read" onclick="openBook('احساسات کے الفاظ','کچھ الفاظ دل کی گہرائیوں سے نکلتے ہیں، اور خاموشی سے دلوں تک پہنچ جاتے ہیں۔')">Read Sample</button>
+</div>
+
+<div class="book" data-category="love">
+<div class="cover"><strong>LOVE</strong><span class="urdu">محبت اور خلوص</span></div>
+<h3 class="urdu">محبت اور خلوص</h3>
+<p>Beautiful thoughts about kindness, care and sincerity.</p>
+<button class="read" onclick="openBook('محبت اور خلوص','خلوص وہ روشنی ہے جو رشتوں کو خوبصورت بناتی ہے۔')">Read Sample</button>
+</div>
+
+<div class="book" data-category="islamic">
+<div class="cover"><strong>ISLAMIC</strong><span class="urdu">اسلامی خیالات</span></div>
+<h3 class="urdu">اسلامی خیالات</h3>
+<p>Meaningful reminders and inspiring Islamic thoughts.</p>
+<button class="read" onclick="openBook('اسلامی خیالات','اللہ پر بھروسہ رکھیں، ہر مشکل کے بعد آسانی ہے۔')">Read Sample</button>
+</div>
+
+<div class="book" data-category="quotes">
+<div class="cover"><strong>LIFE</strong><span class="urdu">زندگی کے اقوال</span></div>
+<h3 class="urdu">زندگی کے اقوال</h3>
+<p>Words of wisdom, hope and motivation for life.</p>
+<button class="read" onclick="openBook('زندگی کے اقوال','زندگی کا ہر دن ایک نیا سبق اور ایک نیا موقع ہے۔')">Read Sample</button>
+</div>
+
+</div>
+<p id="noResults" style="display:none;margin-top:20px">No books found.</p>
+</section>
+
+<section class="about" id="about">
+<h2>About AK KHAN</h2>
+<p>AK KHAN E-BOOKS is a literary platform dedicated to Urdu poetry, meaningful words and beautiful thoughts. Our aim is to share emotions, knowledge and inspiration through books.</p>
+<p class="urdu" style="margin-top:20px">الفاظ کے ذریعے احساسات کو دلوں تک پہنچانا ہمارا مقصد ہے۔</p>
+</section>
+
+<section id="contact">
+<h2>Contact Us</h2>
+<p>For suggestions and book-related enquiries:</p>
+<p class="gold">AK KHAN E-BOOKS</p>
+</section>
+
+<footer>
+<p>© 2026 AK KHAN E-BOOKS. All Rights Reserved.</p>
+<p>Designed with love for Urdu Literature.</p>
+</footer>
+
+<div class="modal" id="sampleModal">
+<div class="modal-box">
+<button class="close" onclick="closeBook()">×</button>
+<h2 id="sampleTitle" class="urdu gold"></h2>
+<p id="sampleText" class="urdu"></p>
+<button class="read" onclick="closeBook()">Close</button>
+</div>
+</div>
+
+<script>
+let currentCategory='all';
+function setCategory(category,button){
+currentCategory=category;
+document.querySelectorAll('.category').forEach(b=>b.classList.remove('active'));
+button.classList.add('active');
+filterBooks();
+}
+function filterBooks(){
+let search=document.getElementById('search').value.toLowerCase();
+let books=document.querySelectorAll('.book');
+let count=0;
+books.forEach(book=>{
+let matchCategory=currentCategory==='all'||book.dataset.category===currentCategory;
+let matchSearch=book.innerText.toLowerCase().includes(search);
+book.style.display=matchCategory&&matchSearch?'block':'none';
+if(matchCategory&&matchSearch)count++;
+});
+document.getElementById('noResults').style.display=count?'none':'block';
+}
+function openBook(title,text){
+document.getElementById('sampleTitle').innerText=title;
+document.getElementById('sampleText').innerText=text;
+document.getElementById('sampleModal').style.display='flex';
+}
+function closeBook(){
+document.getElementById('sampleModal').style.display='none';
+}
+</script>
+</body>
+</html>
